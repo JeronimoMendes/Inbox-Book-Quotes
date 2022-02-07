@@ -5,6 +5,7 @@ import {
 	Route
 } from "react-router-dom";
 import { AddQuotePage } from './pages/AddQuotePage';
+import { LandingPage } from './pages/LandingPage';
 import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
@@ -22,7 +23,8 @@ function App() {
 	return (
 	 <BrowserRouter>
 		<Routes>
-			<Route path="/" element={<AddQuotePage />} />
+			<Route path="/" element={<LandingPage />} />
+			<Route path="/quote" element={<AddQuotePage />} />
 		</Routes>
 	 </BrowserRouter>
 	);
