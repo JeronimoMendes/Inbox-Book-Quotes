@@ -6,9 +6,9 @@ import {
 } from "react-router-dom";
 import { AddQuotePage } from './pages/AddQuotePage';
 import { LandingPage } from './pages/LandingPage';
-import firebase from 'firebase/app';
-import 'firebase/firestore';
-import 'firebase/auth';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import 'firebase/compat/auth';
 
 firebase.initializeApp({
 	apiKey: process.env.REACT_APP_API_KEY,
