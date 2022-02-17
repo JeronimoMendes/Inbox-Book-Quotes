@@ -2,19 +2,30 @@ import React, {useState} from 'react';
 import {
 	Grid,
 	Box,
-	TextField
+	TextField,
+	Button
 } from '@mui/material';
+import { addQuote } from '../utils';
 
 export interface AddQuotePageProps {
 }
 
 export function AddQuotePage (props: AddQuotePageProps) {
-	const [quote, setQuote] = useState<string>();
-	const [author, setAuthor] = useState<string>();
-	const [book, setBook] = useState<string>();
+	const [quote, setQuote] = useState<string>("");
+	const [author, setAuthor] = useState<string>("");
+	const [book, setBook] = useState<string>("");
+
+	const handleClick = async () => {
+		console.log("submiting quote")
+		await addQuote({
+			text: quote,
+			author: author,
+			book: book
+		})
+	}
 
 	return (
-		<Grid container alignItems="center">
+		<Grid direction="column">
 			<Box
 				component="form"
 			>
@@ -47,6 +58,7 @@ export function AddQuotePage (props: AddQuotePageProps) {
 							/>
 						</Grid>
 					</Grid>
+					<Button variant='outlined' onClick={handleClick}>Submit</Button>
 				</Grid>
 			</Box>
 		</Grid>
