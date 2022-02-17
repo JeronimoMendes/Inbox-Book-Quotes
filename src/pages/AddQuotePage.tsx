@@ -20,7 +20,8 @@ export function AddQuotePage (props: AddQuotePageProps) {
 		await addQuote({
 			text: quote,
 			author: author,
-			book: book
+			book: book,
+			createdAt: new Date(),
 		})
 	}
 
