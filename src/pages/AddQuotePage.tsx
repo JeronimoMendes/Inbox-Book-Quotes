@@ -16,7 +16,6 @@ export function AddQuotePage (props: AddQuotePageProps) {
 	const [book, setBook] = useState<string>("");
 
 	const handleClick = async () => {
-		console.log("submiting quote")
 		await addQuote({
 			text: quote,
 			author: author,
