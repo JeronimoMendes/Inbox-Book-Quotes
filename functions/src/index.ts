@@ -18,18 +18,15 @@ export const sendWeeklyQuote = functions.pubsub.schedule('every saturday 17:00')
 	// For each user, send a quote
 	emails.forEach(email => {
 		// fetch random quote from the current user
-
-		const msg = {
+		sgMail.send({
 			to: email,
 			from: '',
-			template_id: TEMPLATE_ID,
-			dynamic_template_data: {
+			templateId: TEMPLATE_ID,
+			dynamicTemplateData: {
 				text: "", // Quote text here
 				author: "", // Quote author here
 				book: "", // Book title here
 			}
-		};
-
-		sgMail.send(msg);		
+		});		
 	});
 });
