@@ -5,10 +5,9 @@ import {
 	updateDoc,
 	doc,
 	setDoc,
-	arrayUnion
+	arrayUnion,
 } from "firebase/firestore";
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import userEvent from "@testing-library/user-event";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 
 const quotesCollectioRef = collection(db, "quote")
 const usersCollectioRef = collection(db, "users")
@@ -24,7 +23,8 @@ interface Quote {
 
 interface User {
 	id: string,
-	quotes: Array<string>
+	quotes: Array<string>,
+	email: string,
 }
 
 export async function addQuote(quote: Quote) {
@@ -41,13 +41,26 @@ async function addUser(user: User) {
 	await setDoc(doc(db, "users", user.id), user);
 }
 
-export async function signIn() {
+export async function signIn(onSuccess: Function) {
 	signInWithPopup(auth, provider)
 	.then((result) => {
-		addUser({
-			id: result.user.uid,
-			quotes: []
-		})
+		console.log(result.user.metadata.creationTime === result.user.metadata.lastSignInTime)
+		if (result.user.metadata.creationTime === result.user.metadata.lastSignInTime) {
+			addUser({
+				id: result.user.uid,
+				email: result.user.email,
+				quotes: []
+			});
+		}
+		onSuccess();
 		// do something to notify the user that the account has been created
 	}) // should probably catch errors
+}
+
+export function currentUser() {
+	return auth.currentUser;
+}
+
+export function logout() {
+	signOut(auth);
 }
