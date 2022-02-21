@@ -2,15 +2,18 @@ import { db } from "./firebase-config";
 import {
 	collection,
 	addDoc,
+	updateDoc,
+	doc,
+	setDoc,
+	arrayUnion
 } from "firebase/firestore";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import userEvent from "@testing-library/user-event";
 
 const quotesCollectioRef = collection(db, "quote")
 const usersCollectioRef = collection(db, "users")
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
-
-
 
 interface Quote {
 	text: string;
@@ -25,11 +28,17 @@ interface User {
 }
 
 export async function addQuote(quote: Quote) {
-	await addDoc(quotesCollectioRef, quote);
+	if (auth.currentUser) {
+		addDoc(quotesCollectioRef, quote)
+		.then((res) => {
+			const userDoc = doc(db, "users", auth.currentUser.uid);
+			updateDoc(userDoc, {quotes: arrayUnion(res.id)})
+		})
+	}
 }
 
 async function addUser(user: User) {
-	await addDoc(usersCollectioRef, user)
+	await setDoc(doc(db, "users", user.id), user);
 }
 
 export async function signIn() {
