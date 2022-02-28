@@ -2,17 +2,26 @@ import React, {useState} from 'react';
 import {
 	Grid, Typography, Button
 } from '@mui/material';
+import {
+	makeStyles
+} from '@mui/styles';
 import {currentUser, signIn, logout} from "../utils";
+import { AddQuotePage } from './AddQuotePage';
 export interface LandingPageProps {
 }
 
+const useStyles = makeStyles({
+	root: {
+		color: "#fff"
+	},
+});
+
 export function LandingPage (props: LandingPageProps) {
 	const [user, setUser] = useState(currentUser());
-	console.log(user)
+	const classes = useStyles();
 
 	const onLogout = () => {
 		logout();
-		console.log("logging out")
 		setUser(null);
 	}
 
@@ -23,16 +32,18 @@ export function LandingPage (props: LandingPageProps) {
 	}
 
 	return (
-		<Grid container justifyContent="center" alignItems="center" direction="column">
+		<Grid className={classes.root} container justifyContent="center" alignItems="center" direction="column">
 			<Grid item>
 				<Typography variant="h1">Welcome to Book Quotes</Typography>
 				<Typography variant="h3">Register quotes and receive them on your e-mail</Typography>
 			</Grid>
-			<Button variant='outlined' href='/quote'>Add quote</Button> 
 			{!user ? (
 				<Button variant='outlined' onClick={onSignIn}>Sign in with Google</Button> 
 			) : (
-				<Typography>Signed in as {user.displayName}. <Button onClick={onLogout}>Logout</Button></Typography>
+				<Grid item justifyContent="center" alignItems="center">
+					<AddQuotePage />
+					<Typography>Signed in as {user.displayName}. <Button onClick={onLogout}>Logout</Button></Typography>
+				</Grid>
 			)}
 		</Grid>
 	);

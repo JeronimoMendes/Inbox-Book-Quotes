@@ -10,7 +10,6 @@ import {
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 
 const quotesCollectioRef = collection(db, "quote")
-const usersCollectioRef = collection(db, "users")
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
 
