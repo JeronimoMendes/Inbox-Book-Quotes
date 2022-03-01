@@ -6,15 +6,31 @@ import {
 } from "react-router-dom";
 import { AddQuotePage } from './pages/AddQuotePage';
 import { LandingPage } from './pages/LandingPage';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const theme = createTheme({
+	typography: {
+		allVariants: {
+			fontFamily: ['Bodoni Moda', 'serif'].join(','),
+		},
+	},
+	palette: {
+		primary: {
+			main: '#fff'
+		}
+	}
+})
 
 function App() {
 	return (
-	 <BrowserRouter>
-		<Routes>
-			<Route path="/" element={<LandingPage />} />
-			<Route path="/quote" element={<AddQuotePage />} />
-		</Routes>
-	 </BrowserRouter>
+		<ThemeProvider theme={theme}>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<LandingPage />} />
+					<Route path="/quote" element={<AddQuotePage />} />
+				</Routes>
+			</BrowserRouter>
+		</ThemeProvider>
 	);
 }
 
