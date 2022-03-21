@@ -11,6 +11,7 @@ import { addQuote } from '../utils';
 const useStyles = makeStyles({
 	box: {
         '& .MuiOutlinedInput-root': { 
+			color: 'white',
             '& fieldset': {            
                 borderColor: 'white',   
 				borderWidth: '2px',
