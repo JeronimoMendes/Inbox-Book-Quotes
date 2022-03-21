@@ -14,6 +14,9 @@ const useStyles = makeStyles({
 	root: {
 		color: "#fff"
 	},
+	signed: {
+		textAlign: 'center'
+	}
 });
 
 export function LandingPage (props: LandingPageProps) {
@@ -42,7 +45,7 @@ export function LandingPage (props: LandingPageProps) {
 			) : (
 				<Grid item justifyContent="center" alignItems="center">
 					<AddQuotePage />
-					<Typography>Signed in as {user.displayName}. <Button onClick={onLogout}>Logout</Button></Typography>
+					<Typography className={classes.signed}>Signed in as {user.displayName}. <Button onClick={onLogout}>Logout</Button></Typography>
 				</Grid>
 			)}
 		</Grid>
