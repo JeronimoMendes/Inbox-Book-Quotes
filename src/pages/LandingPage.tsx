@@ -15,7 +15,8 @@ const useStyles = makeStyles({
 		color: "#fff"
 	},
 	signed: {
-		textAlign: 'center'
+		textAlign: 'center',
+		paddingTop: "2rem"
 	}
 });
 
