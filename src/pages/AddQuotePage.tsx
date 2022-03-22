@@ -3,7 +3,9 @@ import {
 	Grid,
 	Box,
 	TextField,
-	Button
+	Button,
+	Snackbar,
+	Alert
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { addQuote } from '../utils';
@@ -41,6 +43,7 @@ export function AddQuotePage () {
 	const [quote, setQuote] = useState<string>("");
 	const [author, setAuthor] = useState<string>("");
 	const [book, setBook] = useState<string>("");
+	const [success, setSuccess] = useState<boolean>(false);
 
 	const classes = useStyles();
 
@@ -51,13 +54,17 @@ export function AddQuotePage () {
 			book: book,
 			createdAt: new Date(),
 		})
+		setQuote("");
+		setBook("");
+		setAuthor("");
+		setSuccess(true);
 	}
 
 	return (
 		<Box
-				component="form"
-				className={classes.page}
-			>
+			component="form"
+			className={classes.page}
+		>
 			<Grid   container
 					direction="row"
 					justifyContent="center"
@@ -74,6 +81,7 @@ export function AddQuotePage () {
 						multiline
 						rows={4}
 						onChange={(e) => setQuote(e.target.value)}
+						value={quote}
 					/>
 				</Grid>
 				<Grid 
@@ -90,6 +98,7 @@ export function AddQuotePage () {
 							id="outlined"
 							label="Book"
 							onChange={(e) => setBook(e.target.value)}
+							value={book}
 						/>
 					</Grid>
 					<Grid item>
@@ -99,11 +108,24 @@ export function AddQuotePage () {
 							id="outlined"
 							label="Author"
 							onChange={(e) => setAuthor(e.target.value)}
+							value={author}
 						/>
 					</Grid>
 				</Grid>
 			</Grid>
 			<Button variant='outlined' onClick={handleClick}>Submit</Button>
+			<Snackbar open={success} autoHideDuration={6000} onClose={() => setSuccess(false)} anchorOrigin={{ vertical: "bottom", horizontal: 'right' }}>
+				<Alert
+					sx={{
+						backgroundColor: "white",
+						width: "100%",
+					}}
+					onClose={() => setSuccess(false)}
+					severity="success"
+				>
+					Quote submited with success!
+				</Alert>
+			</Snackbar>
 		</Box>
 	);
 }
