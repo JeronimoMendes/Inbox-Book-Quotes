@@ -38,8 +38,8 @@ export function LandingPage (props: LandingPageProps) {
 	return (
 		<Grid className={classes.root} container justifyContent="center" alignItems="center" direction="column">
 			<Grid item>
-				<Typography variant="h1">Welcome to Book Quotes</Typography>
-				<Typography variant="h3">Register quotes and receive them on your e-mail</Typography>
+				<Typography sx={{ typography: { sm: 'h1', xs: 'h3' }, textAlign: 'center' }} variant="h1">Welcome to Book Quotes</Typography>
+				<Typography sx={{ typography: { sm: 'h3', xs: 'h4' }, textAlign: 'center' }} mb={8} variant="h3">Register quotes and receive them on your e-mail</Typography>
 			</Grid>
 			{!user ? (
 				<Button variant='outlined' onClick={onSignIn}>Sign in with Google</Button> 

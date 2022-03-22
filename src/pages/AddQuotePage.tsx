@@ -70,9 +70,10 @@ export function AddQuotePage () {
 					justifyContent="center"
 					alignItems="center"
 					className={classes.container}
+					spacing={2}
 			>
 				
-				<Grid item xs={6}>
+				<Grid item md={6}>
 					<TextField
 						InputLabelProps={{ style: {color: "white"} }}
 						className={classes.box}
@@ -87,10 +88,12 @@ export function AddQuotePage () {
 				<Grid 
 					item 
 					container 
-					xs={6} 
+					md={6} 
 					direction="column"
 					justifyContent="space-between"
-					alignItems="center">
+					alignItems="center"
+					spacing={2}
+				>
 					<Grid item>
 						<TextField
 							InputLabelProps={{ style: {color: "white"} }}
